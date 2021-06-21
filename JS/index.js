@@ -22,7 +22,7 @@ for(let i = 0; i < cells; i++){
 			field.append(cell);
 }
 
-field.addEventListener('click', (event) =>{
+const listner = function(event){
 	if(checkDoubleClick(event.target.getAttribute('cell-num'))){
 		if(event.target.classList.contains('cell')){
 			const cell = event.target;
@@ -31,7 +31,20 @@ field.addEventListener('click', (event) =>{
 			setTimeout(()=>setComputerMove(), 360);
 		}
 	}
-})
+}
+
+field.addEventListener('click', listner);
+
+// field.addEventListener('click', (event) =>{
+// 	if(checkDoubleClick(event.target.getAttribute('cell-num'))){
+// 		if(event.target.classList.contains('cell')){
+// 			const cell = event.target;
+// 			const cellNum = event.target.getAttribute('cell-num');
+// 			setUserMove(cell, cellNum);
+// 			setTimeout(()=>setComputerMove(), 360);
+// 		}
+// 	}
+// })
 
 
 function checkDoubleClick(number){
@@ -99,6 +112,7 @@ function clearMovies(cellNum){
 }
 
 function endGame(str){
+	field.removeEventListener('click', listner);
 	setTimeout(() => field.innerHTML = `<div class = "score">${str}</div>`, 1200);
 }
 
